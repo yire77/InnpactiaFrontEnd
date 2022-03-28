@@ -1,0 +1,52 @@
+<div class="main-container" style="height: 100%;">
+
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
+
+        <!-- ============================================================== -->
+        <!-- Sidebar - style you can find in sidebar.scss -->
+        <!-- ============================================================== -->
+        <mat-sidenav #snav id="snav" class="dark-sidebar pl-xs" [mode]="mobileQuery.matches ? 'side' : 'over'"
+            fixedTopGap="0" [opened]="mobileQuery.matches" [disableClose]="mobileQuery.matches" [(opened)]="opened">
+            <app-sidebar></app-sidebar>
+        </mat-sidenav>
+
+        <mat-sidenav-content class="page-wrapper">
+            <mat-toolbar class="topbar telative colorBack">
+                <div class="navbar-header" *ngIf="mobileQuery.matches && !opened">
+                    <a class="navbar-brand">
+                        <b>
+                            <!-- <img src="assets/images/LOGO ONE Negro.png" alt="homepage" class="imgLogoPrincipal"> -->
+                        </b>
+                    </a>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; width: 100%;">
+                    <button id="snavButton" mat-mini-fab (click)="snav.toggle()" value="sidebarclosed" class="snav">
+                        <mat-icon *ngIf="!opened">menu</mat-icon>
+                        <mat-icon *ngIf="opened">close</mat-icon>
+                    </button>
+                    <b class="letterNavBarSecundary letterNav">Innpactia</b>
+
+                    <app-navbar class="floatRight"></app-navbar>
+                   
+                </div>
+
+
+
+            </mat-toolbar>
+            <!-- ============================================================== -->
+            <!-- Page container - style you can find in pages.scss -->
+            <!-- ============================================================== -->
+            <div class="page-content">
+                <router-outlet>
+                   
+                </router-outlet>
+
+            </div>
+
+        </mat-sidenav-content>
+        <!-- ============================================================== -->
+        <!-- Page container - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+    </mat-sidenav-container>
+</div>

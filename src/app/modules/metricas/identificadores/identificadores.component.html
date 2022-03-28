@@ -1,0 +1,118 @@
+<div class="text-right">
+  <button mat-raised-button color="primary"(click)="openDialog(modal_indicador)" >Nuevo Identificador</button>
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Nombre Identificador</th>
+        <th scope="col">Fecha Identificador</th>
+
+    
+      </tr>
+    </thead>
+    <tbody>
+   <tr *ngFor="let identificadores of identificadoresArray">
+    <td>
+        <button mat-mini-fab color="warn"(click)="eliminarIndicador(identificadores)" >
+        <mat-icon>delete_outline</mat-icon>
+      </button>
+      <button mat-mini-fab class="button-edit" (click)="openDialog(modal_indicador,identificadores)"  >
+        <mat-icon>mode_edit</mat-icon>
+      </button>
+      <button mat-mini-fab  (click)="openDato(modal_dato_indicador,identificadores)"  >
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button mat-mini-fab class="button-export " (click)="exportarExcel(identificadores)"  >
+        <mat-icon>file_download</mat-icon>
+      </button>
+    </td>
+    <td> {{identificadores.nombre_indicador}}</td>
+    <td> {{identificadores.fech_registro|date}}</td>
+  </tr>
+    </tbody>
+  </table>
+
+  <ng-template #modal_indicador>
+    <h2 mat-dialog-title>Indicadores</h2>
+    <mat-dialog-content class="mat-typography">
+
+      <form [formGroup]="identificadorForm" >
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Nombre</label>
+          <input type="text" formControlName="in_nombre_indicador" class="form-control"  >
+        </div>
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Salir</button>
+      <button type="button" class="btn btn-primary" (click)="guardarIndicador()" >Guardar</button>
+    </mat-dialog-actions>
+   
+  </ng-template>
+
+  <ng-template #modal_dato_indicador>
+    <h2 mat-dialog-title>Datos Indicadores</h2>
+    <mat-dialog-content class="mat-typography">
+     
+      <button mat-raised-button color="primary"(click)="openDatoIndicador(modal_add_dato_indicador)" >Nuevo Dato</button>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Total</th>
+            <th scope="col">Fecha</th>
+    
+        
+          </tr>
+        </thead>
+        <tbody id="tableDatos">
+       <tr *ngFor="let dato of identificadorDato">
+        <td>
+           
+          <button mat-mini-fab (click)="openDatoIndicador(modal_add_dato_indicador,dato)"  >
+            <mat-icon>mode_edit</mat-icon>
+          </button>
+        </td>
+        <td> {{dato.descripcion}}</td>
+        <td> {{dato.total}}</td>
+        <td> {{dato.fecha}}</td>
+      </tr>
+        </tbody>
+      </table>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Salir</button>
+    </mat-dialog-actions>
+   
+  </ng-template>
+
+  <ng-template #modal_add_dato_indicador>
+    <h2 mat-dialog-title>Agregar Datos</h2>
+    <mat-dialog-content class="mat-typography">
+
+      <form [formGroup]="datoIdentificador" >
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Descripcion</label>
+          <input type="text" formControlName="descripcion" class="form-control"  >
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Total</label>
+          <input type="text" formControlName="total" class="form-control"  >
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Fecha</label>
+          <input type="date" formControlName="fecha" class="form-control"  >
+        </div>
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Salir</button>
+      <button type="button" class="btn btn-primary" (click)="guardarDato()" >Guardar</button>
+    </mat-dialog-actions>
+   
+  </ng-template>
+  

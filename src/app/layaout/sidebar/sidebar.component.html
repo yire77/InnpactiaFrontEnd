@@ -1,0 +1,31 @@
+<aside class="sidebar">
+    <div id="leftside-navigation" class="nano">
+
+        <mat-accordion class="accordion" *ngFor="let menu of menus">
+            <mat-expansion-panel [expanded]="true" class="mat-expansion-panelP2">
+                <mat-expansion-panel-header>
+
+                    <mat-panel-title>
+                        <span class="textSideHeader ">{{menu.texto}}</span>
+                    </mat-panel-title>
+
+                </mat-expansion-panel-header>
+
+                <ng-template matExpansionPanelContent style="padding: 0%;" class="contentAccordion">
+                    <mat-nav-list appAccordion class="fs2">
+                        <ng-container *ngFor="let menuitem of menu?.hijos">
+                            <mat-divider></mat-divider>
+                            <mat-list-item [routerLinkActive]="['is-active']" [routerLink]="menuitem.url" style="width: 100% !important" class="list">
+                                <!-- <i class="{{menuitem.icono}} icon text-center" mat-list-icon></i> -->
+                                <mat-icon class="icon text-center" mat-list-icon >{{menuitem.icono}}</mat-icon>
+                                <div mat-line class="textSide">{{menuitem.texto }}</div>
+
+                            </mat-list-item>
+                        </ng-container>
+                    </mat-nav-list>
+                </ng-template>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+  </aside>

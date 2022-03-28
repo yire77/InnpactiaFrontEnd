@@ -1,0 +1,46 @@
+<div style="padding: 20px;">
+    <div
+        style="letter-spacing: -0.025em !important; line-height: 2rem !important; font-size: 1.5rem !important; font-weight: 600 !important;">
+        Panel de analisis
+    </div>
+    <div style="letter-spacing: -0.025em !important; font-weight: 500 !important; color: rgba(100, 116, 139, 1);">
+        Monitoreo de métricas, verifique informes y revise el desempeño
+    </div>
+</div>
+
+<div class="row ">
+
+    <div *ngFor="let item of chart" [ngClass]="[item?.class || 'col-md-6 col-sm-12']">
+        <mat-card class="card-chart">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <mat-icon style="font-size: 34px;">trending_up</mat-icon>
+                </div>
+                <mat-card-title>{{item.title}}</mat-card-title>
+                <mat-card-subtitle>{{item.subtitle}}</mat-card-subtitle>
+            </mat-card-header>
+            <div class="card-header chartsuccess">
+                <div class="chart-wrapper">
+                    <canvas baseChart [datasets]="item.data" [labels]="item.chartLabels"
+                        [options]="barChartOptions" [legend]="item.chartLegend" [type]="item.chartType || 'bar'"
+                        [plugins]="barChartPlugins">
+                    </canvas>
+                    
+                </div>
+            </div>
+            <mat-card-content>
+                <!-- <h4 class="card-title">{{item.description}}</h4> -->
+                <p class="card-category">
+                    <span class="text-success">{{item.description}} </span>
+                </p>
+            </mat-card-content>
+
+            <mat-card-actions class="mat-card-footer">
+                <div class="stats">
+                    {{item.footer}}
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+</div>
